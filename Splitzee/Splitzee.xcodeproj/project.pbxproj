@@ -57,7 +57,6 @@
 		E42ABE031DD56CD50002D910 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E42ABE021DD56CD50002D910 /* GoogleService-Info.plist */; };
 		E42ABE051DD56F170002D910 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42ABE041DD56F170002D910 /* Constants.swift */; };
 		E4F85F891DD58EB600342329 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F85F881DD58EB600342329 /* Request.swift */; };
-		E4FC83421DEE873700B7C5EE /* FirstLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FC83411DEE873700B7C5EE /* FirstLaunch.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,7 +137,6 @@
 		E42ABE041DD56F170002D910 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E4F85F881DD58EB600342329 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		E4FA71E01DD78D3B00FEFACC /* CurrentUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
-		E4FC83411DEE873700B7C5EE /* FirstLaunch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstLaunch.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,7 +169,6 @@
 			isa = PBXGroup;
 			children = (
 				14185DBA1DDD6FD400777AD8 /* SignInViewController.swift */,
-				E4FC83411DEE873700B7C5EE /* FirstLaunch.swift */,
 				14185DBC1DDD6FE900777AD8 /* CreateAccountViewController.swift */,
 				14185DBE1DDD709600777AD8 /* CreateGroupViewController.swift */,
 				14185DCE1DDD9D7700777AD8 /* AdminPage */,
@@ -570,7 +567,6 @@
 				14185DC31DDD70B900777AD8 /* MemberPageViewController.swift in Sources */,
 				142D6D011DE19ADC00561003 /* SideBarTableViewCell.swift in Sources */,
 				14185DBF1DDD709600777AD8 /* CreateGroupViewController.swift in Sources */,
-				E4FC83421DEE873700B7C5EE /* FirstLaunch.swift in Sources */,
 				E42ABE051DD56F170002D910 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

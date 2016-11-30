@@ -163,7 +163,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate, UIImag
     
     // -----------FUNCTIONS------------------------------------------------------------------------
     
-    func touchBackToLoginButton(sender: UIButton!) {
+    func touchBackToLoginButton() {
         dismiss(animated: true, completion: nil)
     }
     
@@ -254,8 +254,19 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate, UIImag
         })
     }
     
-    // Creates a new account
     func createAccountPressed(_ sender: UIButton) {
+        let alertView = UIAlertController(title: "Terms and Conditions", message: "In connection with the use of our mobile application, you will not take any action that is considered spam or harassment to any user or group.", preferredStyle: UIAlertControllerStyle.alert)
+        alertView.addAction(UIAlertAction(title: "Accept", style: .default, handler: { (action) in
+            self.createAccount()
+        }))
+        alertView.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
+            self.touchBackToLoginButton()
+        }))
+        self.present(alertView, animated: true, completion: nil)
+    }
+    
+    // Creates a new account
+    func createAccount() {
         
         
         if ((inputFullName.text?.characters.count)! == 0 || (inputPassword.text?.characters.count)! == 0 || (inputConfirmPassword.text?.characters.count)! == 0 || (inputEmail.text?.characters.count)! == 0)
