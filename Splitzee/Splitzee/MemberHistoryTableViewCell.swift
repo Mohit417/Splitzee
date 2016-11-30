@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol MemberHistoryTableViewCellDelegate : class {
+    func report(transaction: Transaction)
+}
+
 class MemberHistoryTableViewCell: UITableViewCell {
     
     var memberPicView: UIImageView!
@@ -16,6 +20,9 @@ class MemberHistoryTableViewCell: UITableViewCell {
     var resultLabel: UILabel!
     var reportButton: UIButton!
     let constants = Constants()
+    var transaction: Transaction!
+    weak var delegate : MemberHistoryTableViewCellDelegate?
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -78,7 +85,12 @@ class MemberHistoryTableViewCell: UITableViewCell {
         reportButton.layer.cornerRadius = 3
         reportButton.layer.borderColor = constants.lightRed.cgColor
         reportButton.clipsToBounds = true
+        reportButton.addTarget(self, action: #selector(report), for: .touchUpInside)
         contentView.addSubview(reportButton)
+    }
+    
+    func report() {
+        delegate?.report(transaction: transaction)
     }
     
 }

@@ -15,7 +15,7 @@ enum ListState {
     case history
 }
 
-class AdminPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AdminPendingTableViewCellDelegate {
+class AdminPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AdminPendingTableViewCellDelegate, AdminHistoryTableViewCellDelegate {
     
     var segmentedView: UISegmentedControl!
     var groupsButton: UIButton!
@@ -52,6 +52,13 @@ class AdminPageViewController: UIViewController, UITableViewDelegate, UITableVie
         //
         transaction.rejectTransaction()
         print("rejected")
+        reloadAllData()
+    }
+    
+    func report(transaction: Transaction) {
+        //
+        transaction.flagTransaction()
+        print("reported")
         reloadAllData()
     }
     
@@ -474,6 +481,8 @@ class AdminPageViewController: UIViewController, UITableViewDelegate, UITableVie
             } else {
                 historyCell?.backgroundColor = UIColor.clear
             }
+            historyCell?.transaction = transaction
+            historyCell?.delegate = self
         }
     }
     

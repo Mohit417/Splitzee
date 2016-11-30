@@ -13,6 +13,7 @@ import FirebaseDatabase
 protocol AdminPendingTableViewCellDelegate : class {
     func approve(transaction: Transaction)
     func reject(transaction: Transaction)
+    func report(transaction: Transaction)
 }
 
 class AdminPendingTableViewCell: UITableViewCell {
@@ -103,6 +104,7 @@ class AdminPendingTableViewCell: UITableViewCell {
         reportButton.layer.cornerRadius = 3
         reportButton.layer.borderColor = constants.lightRed.cgColor
         reportButton.clipsToBounds = true
+        reportButton.addTarget(self, action: #selector(report), for: .touchUpInside)
         contentView.addSubview(reportButton)
     }
     
@@ -112,6 +114,10 @@ class AdminPendingTableViewCell: UITableViewCell {
     
     func reject() {
         delegate?.reject(transaction: transaction)
+    }
+    
+    func report() {
+        delegate?.report(transaction: transaction)
     }
     
 }

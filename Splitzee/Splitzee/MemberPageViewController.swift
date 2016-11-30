@@ -12,7 +12,7 @@ import FirebaseDatabase
 
 
 
-class MemberPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MemberPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MemberHistoryTableViewCellDelegate, MemberPendingTableViewCellDelegate {
     
     var segmentedView: UISegmentedControl!
     var groupsButton: UIButton!
@@ -30,6 +30,13 @@ class MemberPageViewController: UIViewController, UITableViewDelegate, UITableVi
     var historyList: [Transaction] = []
     var incomingList: [Transaction] = []
     var outgoingList: [Transaction] = []
+    
+    func report(transaction: Transaction) {
+        //
+        transaction.flagTransaction()
+        print("reported")
+        reloadAllData()
+    }
     
     
     override func viewDidLoad() {
@@ -49,6 +56,31 @@ class MemberPageViewController: UIViewController, UITableViewDelegate, UITableVi
             }
         }
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        reloadAllData()
+    }
+    
+    func reloadAllData() {
+        transactionList = []
+        historyList = []
+        incomingList = []
+        outgoingList = []
+        let dbRef = FIRDatabase.database().reference()
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        if let uid = uid {
+            dbRef.child(Constants.DataNames.User).child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                self.currUser = CurrentUser(key: uid, currentUserDict: snapshot.value as! [String: AnyObject])
+                DispatchQueue.main.async {
+                    self.setUpTableLists()
+                }
+                
+            }) { (error) in
+                print(error.localizedDescription)
+            }
+        }
     }
     
     func setupUI() {
@@ -161,27 +193,6 @@ class MemberPageViewController: UIViewController, UITableViewDelegate, UITableVi
             self.tableView.reloadData()
             
         })
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        transactionList = []
-        historyList = []
-        incomingList = []
-        outgoingList = []
-        let dbRef = FIRDatabase.database().reference()
-        let uid = FIRAuth.auth()?.currentUser?.uid
-        if let uid = uid {
-            dbRef.child(Constants.DataNames.User).child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-                // Get user value
-                self.currUser = CurrentUser(key: uid, currentUserDict: snapshot.value as! [String: AnyObject])
-                DispatchQueue.main.async {
-                    self.setUpTableLists()
-                }
-                
-            }) { (error) in
-                print(error.localizedDescription)
-            }
-        }
     }
     
     
@@ -324,6 +335,8 @@ class MemberPageViewController: UIViewController, UITableViewDelegate, UITableVi
             
             //Sets description of each transaction
             pendingCell?.descriptionLabel.text = String(describing: transaction.description)
+            pendingCell?.transaction = transaction
+            pendingCell?.delegate = self
             
         case .history:
             
@@ -362,6 +375,9 @@ class MemberPageViewController: UIViewController, UITableViewDelegate, UITableVi
             } else {
                 historyCell?.backgroundColor = UIColor.clear
             }
+            
+            historyCell?.transaction = transaction
+            historyCell?.delegate = self
         }
         
     }
