@@ -28,6 +28,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         setupUI()
         initializeTextFields()
         configureKeyboard()
+        displayEULA()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -167,6 +168,21 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
     }
     
+    
+    func displayEULA(){
+
+        let firstLaunch = UserDefaults.isFirstLaunch()
+        if firstLaunch {
+            let alertView = UIAlertController(title: "Error"
+                , message: "In connection with the use of our mobile application, you will not take any action that is considered spam or harrassment to any user or group.", preferredStyle: UIAlertControllerStyle.alert)
+            alertView.addAction(UIAlertAction(title: "Accept", style: .default, handler: { (action) in
+            }))
+            alertView.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
+            }))
+            self.present(alertView, animated: true, completion: nil)
+        }
+    
+    }
     
     
     // FIREBASE----------------------------------------------------------------
