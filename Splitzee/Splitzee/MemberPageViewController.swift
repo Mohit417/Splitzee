@@ -304,6 +304,8 @@ class MemberPageViewController: UIViewController, UITableViewDelegate, UITableVi
             
             //Sets description of each transaction
             pendingCell?.descriptionLabel.text = String(describing: transaction.description)
+            pendingCell?.transaction = transaction
+            pendingCell?.delegate = self
             
         case .outgoing:
             
