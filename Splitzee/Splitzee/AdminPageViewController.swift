@@ -481,6 +481,13 @@ class AdminPageViewController: UIViewController, UITableViewDelegate, UITableVie
             } else {
                 historyCell?.backgroundColor = UIColor.clear
             }
+            
+            if (transaction.isFlagged) {
+                historyCell?.reportButton.setTitle("Reported", for: .normal)
+                historyCell?.reportButton.layer.backgroundColor = constants.lightRed.cgColor
+                historyCell?.reportButton.setTitleColor(constants.fontWhite, for: .normal)
+            }
+            
             historyCell?.transaction = transaction
             historyCell?.delegate = self
         }
