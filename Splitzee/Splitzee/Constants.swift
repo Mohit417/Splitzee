@@ -56,6 +56,7 @@ struct Constants
         static let amount = "amount"
         static let isApproved = "isApproved"
         static let isRejected = "isRejected"
+        static let isFlagged = "isFlagged"
         static let description = "description"
     }
     

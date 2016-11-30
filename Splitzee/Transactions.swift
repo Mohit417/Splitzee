@@ -22,6 +22,7 @@ class Transaction {
     var isApproved: Bool = false
     var description: String = ""
     var isRejected: Bool = false
+    var isFlagged: Bool = false
     
     
     init(key: String, transactionDict: [String: AnyObject]) {
@@ -50,6 +51,10 @@ class Transaction {
         
         if let rejected = transactionDict[Constants.TransactionFields.isRejected] as? Bool{
             isRejected = rejected
+        }
+        
+        if let flagged = transactionDict[Constants.TransactionFields.isFlagged] as? Bool{
+            isFlagged = flagged
         }
         
         if let descriptionText = transactionDict[Constants.TransactionFields.description] as? String{
@@ -175,6 +180,15 @@ class Transaction {
         let ref = FIRDatabase.database().reference()
         ref.child(Constants.DataNames.Transaction).child(transactionID).child(Constants.TransactionFields.isApproved).setValue(isApproved)
         ref.child(Constants.DataNames.Transaction).child(transactionID).child(Constants.TransactionFields.isRejected).setValue(isRejected)
+    }
+    
+    func flagTransaction() {
+        isApproved = true
+        isFlagged = true
+        
+        let ref = FIRDatabase.database().reference()
+        ref.child(Constants.DataNames.Transaction).child(transactionID).child(Constants.TransactionFields.isApproved).setValue(isApproved)
+        ref.child(Constants.DataNames.Transaction).child(transactionID).child(Constants.TransactionFields.isFlagged).setValue(isFlagged)
     }
     
     /* In the feed for our pending requests, it will now look for transactions

@@ -25,6 +25,7 @@ class AdminPendingTableViewCell: UITableViewCell {
     var transaction: Transaction!
     let constants = Constants()
     let rootRef = FIRDatabase.database().reference()
+    var reportButton: UIButton!
     
     weak var delegate : AdminPendingTableViewCellDelegate?
 
@@ -37,6 +38,7 @@ class AdminPendingTableViewCell: UITableViewCell {
         makeDescriptionLabel()
         makeRejectButton()
         makeApproveButton()
+        makeReportButton()
     }
     
     func makeMemberPicView() {
@@ -90,6 +92,18 @@ class AdminPendingTableViewCell: UITableViewCell {
         approveButton.backgroundColor = constants.lightGreen
         approveButton.addTarget(self, action: #selector(approve), for: .touchUpInside)
         contentView.addSubview(approveButton)
+    }
+    
+    func makeReportButton() {
+        reportButton = UIButton(frame: CGRect(x: 0.803 * contentView.frame.width, y: 0.15 * contentView.frame.height, width: 0.14 * contentView.frame.width, height: 0.225 * contentView.frame.height))
+        reportButton.setTitle("Report", for: .normal)
+        reportButton.setTitleColor(constants.lightRed, for: .normal)
+        reportButton.titleLabel?.font = UIFont(name: "SFUIText-Light", size: 12)
+        reportButton.layer.borderWidth = 1
+        reportButton.layer.cornerRadius = 3
+        reportButton.layer.borderColor = constants.lightRed.cgColor
+        reportButton.clipsToBounds = true
+        contentView.addSubview(reportButton)
     }
     
     func approve() {

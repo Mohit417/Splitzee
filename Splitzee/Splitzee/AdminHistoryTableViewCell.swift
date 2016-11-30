@@ -15,6 +15,7 @@ class AdminHistoryTableViewCell: UITableViewCell {
     var descriptionLabel: UITextView!
     var resultLabel: UILabel!
     let constants = Constants()
+    var reportButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,6 +24,7 @@ class AdminHistoryTableViewCell: UITableViewCell {
         makeMemberNameLabel()
         makeDescriptionLabel()
         makeResultLabel()
+        makeReportButton()
     }
     
     func makeMemberPicView() {
@@ -57,13 +59,25 @@ class AdminHistoryTableViewCell: UITableViewCell {
     
     func makeResultLabel() {
         resultLabel = UILabel()
-        resultLabel.frame = CGRect(x: 0.701 * contentView.frame.width, y: 0.155 * contentView.frame.height, width: 0.294 * contentView.frame.width, height: 0.69 * contentView.frame.height)
+        resultLabel.frame = CGRect(x: 0.701 * contentView.frame.width, y: 0.325 * contentView.frame.height, width: 0.294 * contentView.frame.width, height: 0.69 * contentView.frame.height)
         resultLabel.layer.borderColor = constants.lightBlue.cgColor
         resultLabel.textColor = constants.fontMediumBlue
         resultLabel.font = UIFont(name: "SFUIText-Medium", size: 20)
         resultLabel.textAlignment = .center
         resultLabel.layer.cornerRadius = 3
         contentView.addSubview(resultLabel)
+    }
+    
+    func makeReportButton() {
+        reportButton = UIButton(frame: CGRect(x: 0.803 * contentView.frame.width, y: 0.2 * contentView.frame.height, width: 0.14 * contentView.frame.width, height: 0.225 * contentView.frame.height))
+        reportButton.setTitle("Report", for: .normal)
+        reportButton.setTitleColor(constants.lightRed, for: .normal)
+        reportButton.titleLabel?.font = UIFont(name: "SFUIText-Light", size: 12)
+        reportButton.layer.borderWidth = 1
+        reportButton.layer.cornerRadius = 3
+        reportButton.layer.borderColor = constants.lightRed.cgColor
+        reportButton.clipsToBounds = true
+        contentView.addSubview(reportButton)
     }
 
 }
